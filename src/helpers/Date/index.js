@@ -13,4 +13,5 @@ export const MONTHS = {
   12: "décembre",
 };
 
-export const getMonth = (date) => MONTHS[date.getMonth()];
+export const getMonth = (date) => MONTHS[date.getMonth() + 1 ];
+// ajout d'un " +1 " permettant de rétablir le bon ordre dans notre tableau (il cherchait l'index 0 )
