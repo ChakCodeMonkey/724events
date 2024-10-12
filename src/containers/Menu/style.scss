@@ -24,6 +24,7 @@ nav {
       a {
         text-decoration: none;
         color: $black;
+        cursor: pointer; // ajout d'un pointer
       }
     }
     padding-right: 50px;
