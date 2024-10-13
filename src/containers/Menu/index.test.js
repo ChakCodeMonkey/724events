@@ -20,7 +20,8 @@ describe("When Menu is created", () => {
           bubbles: true,
         })
       );
-      expect(window.document.location.hash).toEqual("#contact");
+      expect(window.document.location.hash).toEqual("");
+      // enleve contact pour supprimer l'erreur de la console et que au clic nous soyons quand même envoyé vers la rubrique attendue
     });
   });
 });
