@@ -8,12 +8,13 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
+    // ajout de " > " pour afficher l'index dans un ordre décroissant
   );
   const nextCard = () => {
     setTimeout(
       () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
-      //ajout de " -1 " permettant de supprimé la card blanche en trop
+      //ajout de " -1 " permettant de supprimé la card blanche en trop pour ne pas dépasser du tableau
       5000
     );
   };
