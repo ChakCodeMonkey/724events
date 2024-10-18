@@ -26,7 +26,7 @@ const Slider = () => {
       {byDateDesc?.map((event, idx) => (
         <>
           <div
-            key={event.id}
+            key={event.id} // changement de valeur pour eviter un doublon et une erreur
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -44,11 +44,11 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${radioIdx}`}
+                  key={`${radioIdx}`} // changement de valeur pour eviter un doublon et une erreur
                   type="radio"
                   name="radio-button"
-                  checked={index === radioIdx}
-                  // permet maintenant d'avoir le même index sur les images et les bullets points
+                  checked={index === radioIdx} // permet maintenant d'avoir le même index sur les images et les bullets points
+                  onChange={() => setIndex(radioIdx)} // Met à jour l'état `index` lorsque l'utilisateur sélectionne un button
                 />
               ))}
             </div>
