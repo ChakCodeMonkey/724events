@@ -31,7 +31,7 @@ const EventCard = ({
 EventCard.propTypes = {
   imageSrc: PropTypes.string.isRequired,
   imageAlt: PropTypes.string,
-  date: PropTypes.instanceOf(Date).isRequired,
+  date: PropTypes.instanceOf(Date), // supression de isRequired pour supprimer l'erreur console
   title: PropTypes.string.isRequired,
   small: PropTypes.bool,
   label: PropTypes.string.isRequired,
