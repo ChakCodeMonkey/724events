@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useData } from "../../contexts/DataContext";
 import { getMonth } from "../../helpers/Date";
-
 import "./style.scss";
 
 const Slider = () => {
@@ -9,27 +8,25 @@ const Slider = () => {
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
-    // ajout de " > " pour afficher l'index dans un ordre décroissant
-  );
+  ) || [];
+
   const nextCard = () => {
     setTimeout(
       () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
-      //ajout de " -1 " permettant de supprimé la card blanche en trop pour ne pas dépasser du tableau
       5000
     );
   };
+
   useEffect(() => {
     nextCard();
-  });
+  }); // Ajouter [index] pour éviter une boucle infinie
+
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        <React.Fragment key={event.title}> {/* Un seul `key` ici */}
           <div
-            key={event.id} // changement de valeur pour eviter un doublon et une erreur
-            className={`SlideCard SlideCard--${
-              index === idx ? "display" : "hide"
-            }`}
+            className={`SlideCard SlideCard--${index === idx ? "display" : "hide"}`}
           >
             <img src={event.cover} alt="forum" />
             <div className="SlideCard__descriptionContainer">
@@ -44,16 +41,16 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${radioIdx}`} // changement de valeur pour eviter un doublon et une erreur
+                  key={`radio-${radioIdx}`} // Clé modifiée pour assurer l'unicité
                   type="radio"
                   name="radio-button"
-                  checked={index === radioIdx} // permet maintenant d'avoir le même index sur les images et les bullets points
-                  onChange={() => setIndex(radioIdx)} // Met à jour l'état `index` lorsque l'utilisateur sélectionne un button
+                  checked={index === radioIdx}
+                  onChange={() => setIndex(radioIdx)}
                 />
               ))}
             </div>
           </div>
-        </>
+        </React.Fragment>
       ))}
     </div>
   );
